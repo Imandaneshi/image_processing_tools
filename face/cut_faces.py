@@ -21,22 +21,6 @@ parser.add_argument("--processors", help="Number of processors to be used", requ
 args = parser.parse_args()
 
 
-def get_image_size(max_width, max_height, width, height):
-    # Function to calculate image size
-    if width > max_width or height > max_height:
-        if width > height:
-            reduce_factor = max_width / float(width)
-            reduced_width = int(width * reduce_factor)
-            reduced_height = int(height * reduce_factor)
-        else:
-            reduce_factor = max_height / float(height)
-            reduced_width = int(width * reduce_factor)
-            reduced_height = int(height * reduce_factor)
-        return reduced_width, reduced_height
-    else:
-        return width, height
-
-
 def cut_faces(name, face_counter):
     image = face_recognition.load_image_file(Path(args.input_dir).joinpath(name))
     face_locations = face_recognition.face_locations(image, args.upsample)
